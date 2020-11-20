@@ -15,21 +15,25 @@ user_id INT (15) PRIMARY KEY AUTO_INCREMENT,
 CREATE TABLE songs (
 song_id INT (15) PRIMARY KEY AUTO_INCREMENT,
 user_id INT,
+category_id INT,
 song_title VARCHAR (30) NOT NULL,
-category VARCHAR (30) NOT NULL,
 release_date DATETIME,
-FOREIGN KEY (user_id) references artist (user_id)
+FOREIGN KEY (user_id) references artist (user_id),
+FOREIGN KEY (category_id) references category (category_id)
+);
+
+CREATE TABLE category (
+category_id INT (15) PRIMARY KEY AUTO_INCREMENT,
+category_name VARCHAR (30) NOT NULL
 );
 
 CREATE TABLE album (
     album_id INT (15) PRIMARY KEY AUTO_INCREMENT,
     album_title VARCHAR (30) NOT NULL,
-    user_id INT (15),
-    song_id INT (15),
-    category VARCHAR (30),
+    user_id INT,
+    song_id INT,
     FOREIGN KEY (user_id) references artist (user_id),
-    FOREIGN KEY (song_id) references songs (song_id),
-    FOREIGN KEY (category) references songs (category)
+    FOREIGN KEY (song_id) references songs (song_id)
 );
 
 CREATE TABLE user_login (
